@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Order
+{% endblock %}
+
+
+{% block content %}
+
+<h2 class="mb-4">➕ Create New Order</h2>
+
+
+<form method="POST">
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Customer
+</label>
+
+<select name="customer_id" class="form-control" required>
+
+{% for customer in customers %}
+
+<option value="{{customer[0]}}">
+{{customer[1]}}
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Product
+</label>
+
+
+<select name="product_id" class="form-control" required>
+
+
+{% for product in products %}
+
+<option value="{{product[0]}}">
+
+{{product[1]}} 
+(₹{{product[3]}} | Stock: {{product[4]}})
+
+</option>
+
+
+{% endfor %}
+
+</select>
+
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Quantity
+</label>
+
+<input 
+type="number"
+name="quantity"
+class="form-control"
+min="1"
+required>
+
+</div>
+
+
+
+<button class="btn btn-success">
+Place Order
+</button>
+
+
+</form>
+
+
+{% endblock %}

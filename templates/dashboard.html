@@ -1,0 +1,616 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+<h2 class="mb-4">
+📊 Grocery Dashboard
+</h2>
+
+
+
+<!-- Dashboard Cards -->
+
+<div class="row">
+
+
+<div class="col-md-3">
+
+<div class="card text-bg-success mb-3">
+
+<div class="card-body">
+
+<h5>📦 Products</h5>
+
+<h2>{{ total_products }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="col-md-3">
+
+<div class="card text-bg-primary mb-3">
+
+<div class="card-body">
+
+<h5>👥 Customers</h5>
+
+<h2>{{ total_customers }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="col-md-3">
+
+<div class="card text-bg-warning mb-3">
+
+<div class="card-body">
+
+<h5>🛒 Orders</h5>
+
+<h2>{{ total_orders }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="col-md-3">
+
+<div class="card text-bg-danger mb-3">
+
+<div class="card-body">
+
+<h5>⚠ Low Stock</h5>
+
+<h2>{{ low_stock }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- Total Sales -->
+
+<div class="card mt-4">
+
+<div class="card-body">
+
+<h4>
+💰 Total Sales : ₹{{ total_sales }}
+</h4>
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+<!-- Sales Chart -->
+
+<div class="card mt-4">
+
+
+<div class="card-body">
+
+
+<h4>
+📈 Top Selling Products
+</h4>
+
+
+
+<div style="height:400px;">
+
+<canvas id="salesChart"></canvas>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- Recent Orders -->
+
+
+<div class="card mt-4">
+
+
+<div class="card-body">
+
+
+<h4>
+📦 Recent Orders
+</h4>
+
+
+
+<table class="table table-striped">
+
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Customer</th>
+<th>Product</th>
+<th>Quantity</th>
+<th>Total</th>
+<th>Date</th>
+
+
+</tr>
+
+</thead>
+
+
+
+
+<tbody>
+
+
+{% for order in recent_orders %}
+
+
+<tr>
+
+<td>{{ order[0] }}</td>
+
+<td>{{ order[1] }}</td>
+
+<td>{{ order[2] }}</td>
+
+<td>{{ order[3] }}</td>
+
+<td>₹{{ order[4] }}</td>
+
+<td>{{ order[5] }}</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- Low Stock Alert -->
+
+
+<div class="card mt-4">
+
+
+<div class="card-body">
+
+
+<h4>
+⚠ Low Stock Products
+</h4>
+
+
+
+<table class="table table-danger">
+
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Product</th>
+<th>Stock</th>
+<th>Status</th>
+
+
+</tr>
+
+</thead>
+
+
+
+
+<tbody>
+
+
+
+{% for product in low_stock_products %}
+
+
+<tr>
+
+
+<td>{{ product[0] }}</td>
+
+
+<td>{{ product[1] }}</td>
+
+
+<td>{{ product[2] }}</td>
+
+
+
+<td>
+
+
+{% if product[2] <= 3 %}
+
+
+<span class="badge bg-danger">
+Critical
+</span>
+
+
+{% else %}
+
+
+<span class="badge bg-warning">
+Low
+</span>
+
+
+{% endif %}
+
+
+
+</td>
+
+
+
+</tr>
+
+
+{% endfor %}
+
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- Inventory Chart -->
+
+
+<div class="card mt-4">
+
+
+<div class="card-body">
+
+
+<h4>
+📊 Inventory Stock Level
+</h4>
+
+
+
+<div style="height:400px;">
+
+
+<canvas id="inventoryChart"></canvas>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- Chart JS -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
+
+<!-- Sales Chart Script -->
+
+
+<script>
+
+
+const productNames = [
+
+{% for item in sales_data %}
+
+"{{ item[0] }}",
+
+{% endfor %}
+
+];
+
+
+
+const quantities = [
+
+{% for item in sales_data %}
+
+{{ item[1] }},
+
+{% endfor %}
+
+];
+
+
+
+
+
+new Chart(
+
+document.getElementById("salesChart"),
+
+{
+
+
+type:"bar",
+
+
+data:{
+
+
+labels:productNames,
+
+
+datasets:[{
+
+
+label:"Quantity Sold",
+
+
+data:quantities
+
+
+}]
+
+
+},
+
+
+
+options:{
+
+
+responsive:true,
+
+
+maintainAspectRatio:false,
+
+
+scales:{
+
+
+y:{
+
+
+beginAtZero:true
+
+
+}
+
+
+}
+
+
+}
+
+
+
+}
+
+
+);
+
+
+
+</script>
+
+
+
+
+
+
+
+
+<!-- Inventory Chart Script -->
+
+
+<script>
+
+
+const inventoryNames = [
+
+
+{% for product in low_stock_products %}
+
+"{{ product[1] }}",
+
+{% endfor %}
+
+
+];
+
+
+
+
+
+const inventoryQuantity = [
+
+
+{% for product in low_stock_products %}
+
+{{ product[2] }},
+
+{% endfor %}
+
+
+];
+
+
+
+
+
+new Chart(
+
+
+document.getElementById("inventoryChart"),
+
+
+{
+
+
+type:"bar",
+
+
+data:{
+
+
+labels:inventoryNames,
+
+
+datasets:[{
+
+
+label:"Available Stock",
+
+
+data:inventoryQuantity
+
+
+}]
+
+
+},
+
+
+
+options:{
+
+
+responsive:true,
+
+
+maintainAspectRatio:false,
+
+
+scales:{
+
+
+y:{
+
+
+beginAtZero:true
+
+
+}
+
+
+}
+
+
+}
+
+
+
+}
+
+
+
+);
+
+
+
+</script>
+
+
+
+
+
+{% endblock %}

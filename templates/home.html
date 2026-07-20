@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Home - Grocery Management
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container mt-5">
+
+
+    <!-- Hero Section -->
+
+    <div class="text-center mb-5">
+
+
+        <h1 class="fw-bold text-success display-5">
+
+            🥬 Grocery Management System
+
+        </h1>
+
+
+
+        <p class="lead text-muted">
+
+            Manage products, customers, orders and inventory efficiently.
+
+        </p>
+
+
+
+
+        <a href="{{ url_for('dashboard') }}"
+           class="btn btn-success btn-lg shadow">
+
+            <i class="bi bi-speedometer2"></i>
+            View Dashboard
+
+        </a>
+
+
+
+    </div>
+
+
+
+
+
+    <!-- Feature Cards -->
+
+
+    <div class="row g-4">
+
+
+
+        <!-- Products Card -->
+
+
+        <div class="col-md-4">
+
+
+            <div class="card shadow border-0 text-center h-100 p-4">
+
+
+                <div class="text-success">
+
+                    <i class="bi bi-cart4 display-3"></i>
+
+                </div>
+
+
+
+                <h3 class="mt-3 fw-bold">
+
+                    Products
+
+                </h3>
+
+
+
+                <p class="text-muted">
+
+                    Manage grocery products, stock quantity and prices.
+
+                </p>
+
+
+
+                <a href="{{ url_for('products') }}"
+                   class="btn btn-outline-success mt-auto">
+
+
+                    <i class="bi bi-eye"></i>
+
+                    Manage Products
+
+
+                </a>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+        <!-- Customers Card -->
+
+
+        <div class="col-md-4">
+
+
+            <div class="card shadow border-0 text-center h-100 p-4">
+
+
+
+                <div class="text-primary">
+
+                    <i class="bi bi-people display-3"></i>
+
+                </div>
+
+
+
+
+                <h3 class="mt-3 fw-bold">
+
+                    Customers
+
+                </h3>
+
+
+
+
+                <p class="text-muted">
+
+                    Manage customer records and details.
+
+                </p>
+
+
+
+
+                <a href="{{ url_for('customers') }}"
+                   class="btn btn-outline-primary mt-auto">
+
+
+                    <i class="bi bi-person-lines-fill"></i>
+
+                    Manage Customers
+
+
+                </a>
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Orders Card -->
+
+
+        <div class="col-md-4">
+
+
+            <div class="card shadow border-0 text-center h-100 p-4">
+
+
+
+                <div class="text-warning">
+
+                    <i class="bi bi-box-seam display-3"></i>
+
+                </div>
+
+
+
+
+                <h3 class="mt-3 fw-bold">
+
+                    Orders
+
+                </h3>
+
+
+
+
+                <p class="text-muted">
+
+                    Create and track grocery orders.
+
+                </p>
+
+
+
+
+                <a href="{{ url_for('orders') }}"
+                   class="btn btn-outline-warning mt-auto">
+
+
+                    <i class="bi bi-bag-check"></i>
+
+                    View Orders
+
+
+                </a>
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+{% endblock %}

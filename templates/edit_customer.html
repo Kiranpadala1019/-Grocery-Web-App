@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Edit Customer
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container mt-4">
+
+
+    <h2 class="mb-4">
+        ✏️ Edit Customer
+    </h2>
+
+
+
+    <form method="POST">
+
+
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Name
+            </label>
+
+            <input type="text"
+                   name="name"
+                   class="form-control"
+                   value="{{ customer[1] }}"
+                   required>
+
+        </div>
+
+
+
+
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Phone
+            </label>
+
+            <input type="text"
+                   name="phone"
+                   class="form-control"
+                   value="{{ customer[2] }}"
+                   required>
+
+        </div>
+
+
+
+
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Email
+            </label>
+
+            <input type="email"
+                   name="email"
+                   class="form-control"
+                   value="{{ customer[3] }}">
+
+        </div>
+
+
+
+
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Address
+            </label>
+
+            <textarea name="address"
+                      class="form-control">{{ customer[4] }}</textarea>
+
+        </div>
+
+
+
+
+
+        <button type="submit"
+                class="btn btn-warning">
+
+            ✏️ Update Customer
+
+        </button>
+
+
+
+
+        <a href="{{ url_for('customers') }}"
+           class="btn btn-secondary">
+
+            ⬅ Back
+
+        </a>
+
+
+
+    </form>
+
+
+
+</div>
+
+
+
+{% endblock %}

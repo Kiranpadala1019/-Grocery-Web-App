@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<div class="hero shadow">
+
+    <h1 class="text-success">
+        🥬 Grocery Management System
+    </h1>
+
+    <p class="lead">
+        Manage products, customers, orders and inventory efficiently.
+    </p>
+
+    <a href="/products" class="btn btn-success btn-lg">
+        Get Started
+    </a>
+
+</div>
+
+<br>
+
+<div class="row">
+
+    <div class="col-md-4">
+
+        <div class="card shadow">
+
+            <div class="card-body text-center">
+
+                <h3>📦</h3>
+
+                <h4>Products</h4>
+
+                <p>Manage grocery products.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow">
+
+            <div class="card-body text-center">
+
+                <h3>👥</h3>
+
+                <h4>Customers</h4>
+
+                <p>Manage customer records.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card shadow">
+
+            <div class="card-body text-center">
+
+                <h3>🛒</h3>
+
+                <h4>Orders</h4>
+
+                <p>Manage grocery orders.</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
